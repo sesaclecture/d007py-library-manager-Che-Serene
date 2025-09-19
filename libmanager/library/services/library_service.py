@@ -25,8 +25,8 @@ class LibraryService(BaseService):
         for i, book in enumerate(self._books) :
             if book.title == title :
                 del self._books[i]
-                break
-            raise ValueError
+                return
+        raise ValueError
 
 
     def list_books(self) -> Iterable[Book]:
@@ -35,7 +35,7 @@ class LibraryService(BaseService):
 
     def find_book(self, title: str) -> Book:
         # TODO: 제목으로 책 찾기 (없으면 ValueError)
-        for i, book in enumerate(self._books) :
-            if book.title == title :
-                return self._books[i]
-            raise ValueError
+        for book in self._books:
+            if book.title == title:
+                return book
+        raise ValueError
